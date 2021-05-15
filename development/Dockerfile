@@ -1,4 +1,5 @@
-ARG python_ver=3.7
+ARG python_ver=3.8
+
 FROM python:${python_ver}
 
 ENV PYTHONUNBUFFERED 1
