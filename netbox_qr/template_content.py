@@ -1,12 +1,12 @@
 from extras.plugins import PluginTemplateExtension
-#from .models import Animal
 
 class DeviceContent(PluginTemplateExtension):
-    model = 'dcim.content'
-    img = ''
+    model = 'dcim.device'
+
     def right_page(self):
+        test = "Test"
         return self.render('netbox_qr/device_qr.html', extra_context={
-            'image': img,
+            'image': test,
         })
 
 template_extensions = [DeviceContent]
