@@ -226,6 +226,14 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "segno"
+version = "1.3.3"
+description = "QR Code and Micro QR Code generator for Python 2 and Python 3"
+category = "main"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
+
+[[package]]
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
@@ -291,7 +299,7 @@ pyyaml = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "b207e6168a8c08900509dd8f83ea979993d982455e32876935b2cb23dd438230"
+content-hash = "bd03f03599191e7d3f4f6a5598f446ba93a4cc780d064fdee19db814f5f3d15e"
 
 [metadata.files]
 appdirs = [
@@ -464,6 +472,10 @@ regex = [
     {file = "regex-2021.4.4-cp39-cp39-win32.whl", hash = "sha256:fa4537fb4a98fe8fde99626e4681cc644bdcf2a795038533f9f711513a862ae6"},
     {file = "regex-2021.4.4-cp39-cp39-win_amd64.whl", hash = "sha256:97f29f57d5b84e73fbaf99ab3e26134e6687348e95ef6b48cfd2c06807005a07"},
     {file = "regex-2021.4.4.tar.gz", hash = "sha256:52ba3d3f9b942c49d7e4bc105bb28551c44065f139a65062ab7912bef10c9afb"},
+]
+segno = [
+    {file = "segno-1.3.3-py2.py3-none-any.whl", hash = "sha256:2052d1fec957eee652a3785fe7c00e76099eeb6b189723e98eb2829351a2cb30"},
+    {file = "segno-1.3.3.tar.gz", hash = "sha256:505766f18c935f606097dc02280aa9cd28f21b3395ebf33292999af9e9d8f138"},
 ]
 six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
