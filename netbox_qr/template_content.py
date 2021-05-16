@@ -34,10 +34,7 @@ class DeviceQRCodeContent(PluginTemplateExtension):
             with_text = False
         return self.render(
             "netbox_qr/device_qr.html",
-            extra_context={
-                "qr": generate_qrcode(self, 2),
-                "with_text": with_text
-            },
+            extra_context={"qr": generate_qrcode(self, 2), "with_text": with_text},
         )
 
 
