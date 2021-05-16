@@ -1,22 +1,115 @@
+"""Netbox QR Code template content."""
+
 from extras.plugins import PluginTemplateExtension
 import segno
-#import io
 
-class DeviceContent(PluginTemplateExtension):
-    model = 'dcim.device'
+# import io
+
+
+def generate_qrcode(self, scale=10):
+    """Generate QR Code."""
+    url = self.context["request"].build_absolute_uri(
+        self.context["object"].get_absolute_url()
+    )
+    qrcode = segno.make_qr(url).svg_data_uri(scale=scale)
+    return qrcode
+
+
+class DeviceQRCodeContent(PluginTemplateExtension):
+    """Generate QR Code Content for Devices."""
+
+    model = "dcim.device"
 
     def right_page(self):
-#        qr = segno.make('Yellow Submarine')
-#        buffer = io.BytesIO()
-#        qr.save(buffer, format="PNG")
-#        qr_b64 = "data:image/png;base64,"+base64.b64encode(buffer.getvalue()).decode("utf-8")
-# working
-#        qr = segno.make('Up Jumped the Devil').svg_data_uri()
-        url = self.context['request'].build_absolute_uri(self.context['object'].get_absolute_url())
-        qr = segno.make_qr(url).svg_data_uri(scale=10)
+        """Show QR Code Content on right side of view."""
+        return self.render(
+            "netbox_qr/device_qr.html",
+            extra_context={
+                "qr": generate_qrcode(self, 2),
+            },
+        )
 
-        return self.render('netbox_qr/device_qr.html', extra_context={
-            'qr': qr,
-        })
 
-template_extensions = [DeviceContent]
+class RackQRCodeContent(PluginTemplateExtension):
+    """Generate QR Code Content for Racks."""
+
+    model = "dcim.rack"
+
+    def right_page(self):
+        """Show QR Code Content on right side of view."""
+        return self.render(
+            "netbox_qr/device_qr.html",
+            extra_context={
+                "qr": generate_qrcode(self, 2),
+            },
+        )
+
+
+class CableQRCodeContent(PluginTemplateExtension):
+    """Generate QR Code Content for Cables."""
+
+    model = "dcim.cable"
+
+    def right_page(self):
+        """Show QR Code Content on right side of view."""
+        return self.render(
+            "netbox_qr/device_qr.html",
+            extra_context={
+                "qr": generate_qrcode(self, 2),
+            },
+        )
+
+
+class LocationQRCodeContent(PluginTemplateExtension):
+    """Generate QR Code Content for Locations."""
+
+    model = "dcim.location"
+
+    def right_page(self):
+        """Show QR Code Content on right side of view."""
+        return self.render(
+            "netbox_qr/device_qr.html",
+            extra_context={
+                "qr": generate_qrcode(self, 2),
+            },
+        )
+
+
+class PowerPanelQRCodeContent(PluginTemplateExtension):
+    """Generate QR Code Content for Power Panels."""
+
+    model = "dcim.powerpanel"
+
+    def right_page(self):
+        """Show QR Code Content on right side of view."""
+        return self.render(
+            "netbox_qr/device_qr.html",
+            extra_context={
+                "qr": generate_qrcode(self, 2),
+            },
+        )
+
+
+class PowerFeedQRCodeContent(PluginTemplateExtension):
+    """Generate QR Code Content for Power Feeds."""
+
+    model = "dcim.powerfeed"
+
+    def right_page(self):
+        """Show QR Code Content on right side of view."""
+        return self.render(
+            "netbox_qr/device_qr.html",
+            extra_context={
+                "qr": generate_qrcode(self, 2),
+            },
+        )
+
+
+template_extensions = [
+    DeviceQRCodeContent,
+    RackQRCodeContent,
+    CableQRCodeContent,
+    LocationQRCodeContent,
+    PowerPanelQRCodeContent,
+    PowerFeedQRCodeContent,
+]

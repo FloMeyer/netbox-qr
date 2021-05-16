@@ -1,4 +1,7 @@
+"""Plugin declaration."""
+
 from extras.plugins import PluginConfig
+
 
 class QRConfig(PluginConfig):
     """Plugin configuration for the netbox_qr plugin."""
@@ -10,13 +13,7 @@ class QRConfig(PluginConfig):
     description = "A netbox plugin for generating qr codes for specific pages."
     base_url = "qr"
     required_settings = []
-    default_settings = {
-        'pages': [
-                'device',
-                'rack',
-                'cable'
-            ]
-    }
+    default_settings = {"pages": ["device", "rack", "cable"]}
     caching_config = {}
 
 

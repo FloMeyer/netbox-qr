@@ -30,6 +30,7 @@ for key in [
 
 def is_truthy(arg):
     """Convert "truthy" strings into Booleans.
+
     Examples:
         >>> is_truthy('yes')
         True
@@ -43,7 +44,9 @@ def is_truthy(arg):
     try:
         bool_val = strtobool(arg)
     except ValueError:
-        raise ImproperlyConfigured(f"Unexpected variable value: {arg}")  # pylint: disable=raise-missing-from
+        raise ImproperlyConfigured(
+            f"Unexpected variable value: {arg}"
+        )  # pylint: disable=raise-missing-from
 
     return bool(bool_val)
 
@@ -72,7 +75,9 @@ DATABASE = {
     "PASSWORD": os.environ["POSTGRES_PASSWORD"],
     # PostgreSQL password
     "HOST": os.environ["POSTGRES_HOST"],  # Database server
-    "PORT": 5432 if "POSTGRES_PORT" not in os.environ else int(os.environ["POSTGRES_PORT"]),  # Database port
+    "PORT": 5432
+    if "POSTGRES_PORT" not in os.environ
+    else int(os.environ["POSTGRES_PORT"]),  # Database port
 }
 
 # This key is used for secure generation of random numbers and strings. It must never be exposed outside of this file.
@@ -110,7 +115,9 @@ elif NETBOX_RELEASE_CURRENT < NETBOX_RELEASE_2113:
 elif NETBOX_RELEASE_CURRENT == NETBOX_RELEASE_2113:
     RQ_DEFAULT_TIMEOUT = 300
 else:
-    raise ImproperlyConfigured(f"Version {NETBOX_RELEASE_CURRENT} of NetBox is unsupported at this time. {NETBOX_RELEASE_2113} is the max supported one.")
+    raise ImproperlyConfigured(
+        f"Version {NETBOX_RELEASE_CURRENT} of NetBox is unsupported at this time. {NETBOX_RELEASE_2113} is the max supported one."
+    )
 
 #########################
 #                       #
@@ -191,7 +198,13 @@ LOGGING = {
             "style": "{",
         },
     },
-    "handlers": {"console": {"level": "DEBUG", "class": "rq.utils.ColorizingStreamHandler", "formatter": "verbose"}},
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "rq.utils.ColorizingStreamHandler",
+            "formatter": "verbose",
+        }
+    },
     "root": {"handlers": ["console"], "level": LOG_LEVEL},
 }
 
@@ -236,12 +249,13 @@ PLUGINS = ["netbox_qr"]
 # Plugins configuration settings. These settings are used by various plugins that the user may have installed.
 # Each key in the dictionary is the name of an installed plugin and its value is a dictionary of settings.
 PLUGINS_CONFIG = {
-    'netbox_qr': {
-        'pages': [
-            'device',
-            'rack',
-            'cable'
-        ]
+    "netbox_qr": {
+        "with_text": True,
+        "text_fields": ["name", "serial"],
+        "font": "Arial",
+        "config_device": {},
+        "config_rack": {},
+        "config_cable": {},
     }
 }
 
@@ -263,7 +277,9 @@ elif NETBOX_RELEASE_CURRENT <= NETBOX_RELEASE_2113:
     REMOTE_AUTH_BACKEND = "netbox.authentication.RemoteUserBackend"
     REMOTE_AUTH_DEFAULT_PERMISSIONS = {}
 else:
-    raise ImproperlyConfigured(f"Version {NETBOX_RELEASE_CURRENT} of NetBox is unsupported at this time.")
+    raise ImproperlyConfigured(
+        f"Version {NETBOX_RELEASE_CURRENT} of NetBox is unsupported at this time."
+    )
 
 # This determines how often the GitHub API is called to check the latest release of NetBox. Must be at least 1 hour.
 RELEASE_CHECK_TIMEOUT = 24 * 3600
