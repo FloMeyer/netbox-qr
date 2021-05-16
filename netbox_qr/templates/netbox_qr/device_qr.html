@@ -2,11 +2,22 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <strong>QR Code</strong>
+        <div class="pull-right">
+            <div class="btn-group btn-group-xs" role="group">
+                <a href="?format=with_text" class="btn btn-default{% if with_text %} active {% endif %}">With Text</a>
+                <a href="?format=without_text" class="btn btn-default{% if not with_text %} active {% endif %}">Without Text</a>
+            </div>
+        </div>
     </div>
     <div class="panel-body">
         
-            <span class="text-muted"><img src="{{qr}}"></span>
+        <span class="text-muted"><img src="{{qr}}"></span>
         
+    </div>
+    <div class="panel-footer text-right noprint">
+        <button onclick="printImg('data:image/png;base64,{{image}}')" ; class="btn btn-xs btn-primary">
+            <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Print
+        </button>
     </div>
 </div>
 {% endblock %}

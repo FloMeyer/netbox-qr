@@ -22,10 +22,21 @@ class DeviceQRCodeContent(PluginTemplateExtension):
 
     def right_page(self):
         """Show QR Code Content on right side of view."""
+        # Check for export rendering (except for table-based)
+        if (
+            "format" in self.context["request"].GET
+            and self.context["request"].GET["format"] != "without_text"
+        ):
+            text = self.context["request"].GET["format"]
+            with_text = True
+        else:
+            text = None
+            with_text = False
         return self.render(
             "netbox_qr/device_qr.html",
             extra_context={
                 "qr": generate_qrcode(self, 2),
+                "with_text": with_text
             },
         )
 
