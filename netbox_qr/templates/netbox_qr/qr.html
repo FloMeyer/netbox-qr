@@ -1,4 +1,11 @@
 {% block content %}
+<script type="text/javascript">
+    function printImg(source) {
+        var win = window.open('');
+        win.document.write('<img src="' + source + '" onload="window.print();window.close()" />');
+        win.focus();
+    }
+</script>
 <div class="panel panel-default">
     <div class="panel-heading">
         <strong>QR Code</strong>
