@@ -8,6 +8,8 @@ license = "Apache 2.0"
 [tool.poetry.dependencies]
 python = "^3.8"
 segno = "^1.3.3"
+Pillow = "^8.2.0"
+qrcode-artistic = "^2.1.0"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.0"
