@@ -22,6 +22,15 @@ class QRCodeContent(PluginTemplateExtension):
         """Override default config."""
         config.update(obj_cfg)
 
+        """Check for format in request, to display the right activated button on the web page."""
+        if (
+            "format" in self.context["request"].GET
+            and self.context["request"].GET["format"] != "without_text"
+        ):
+            with_text = True
+        else:
+            with_text = False
+
         """Generate the data which is read by the qr code reader."""
         qrcodedata = generate_data_from_fields(config, obj, "data_fields", url)
 
@@ -32,16 +41,8 @@ class QRCodeContent(PluginTemplateExtension):
         qrcode_image = image_ensure_data_in_image(qrcode_image, config, obj)
 
         """Check if we want text below or next to the QRCode."""
-        qrcode_image = image_ensure_text_in_image(qrcode_image, config,obj)
-
-        """Check for format in request, to display the right activated button on the web page."""
-        if (
-            "format" in self.context["request"].GET
-            and self.context["request"].GET["format"] != "without_text"
-        ):
-            btn_with_text = True
-        else:
-            btn_with_text = False
+        if with_text:
+            qrcode_image = image_ensure_text_in_image(qrcode_image, config,obj)
 
         """Render the page content."""
         return self.render(
