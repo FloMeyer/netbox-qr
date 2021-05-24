@@ -29,13 +29,22 @@ def get_concat_v(im1, im2):
     return dst
 
 
+def split(str, num):
+    return [ str[start:start+num] for start in range(0, len(str), num) ]
+
+
 def image_ensure_text_in_image(img, config, obj, text_below = False):
     """Generate a new empty image."""
     if text_below:
-        # Generate empty Image
-        img_text = Image.new("L", (img.width, 40), "white")
         # Generate the text variable.
         text = generate_data_from_fields(config, obj, "text_below_fields", None, 8000)
+        # split text to lines every 12 characters
+        text_splitted = split(text, 12)
+        text = "\r\n".join(text_splitted)
+        lines = len(text_splitted)
+        # Generate empty Image
+        img_text = Image.new("L", (img.width, lines*12), "white")
+        
         # Now try the biggest possible font size.
         font_size = 56
         flag = True
@@ -43,7 +52,7 @@ def image_ensure_text_in_image(img, config, obj, text_below = False):
             font = get_font(config, font_size)
             draw = ImageDraw.Draw(img_text)
             text_width, text_height = draw.textsize(text, font=font)
-            if text_width < img.width and text_height < 40:
+            if text_width < img.width and text_height < lines*12:
                 flag = False
             font_size -= 1
         # Now draw the text to img_text.
