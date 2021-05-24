@@ -23,16 +23,16 @@ class QRCodeContent(PluginTemplateExtension):
         config.update(obj_cfg)
 
         """Add the URL at the end of the data field."""
-        qrcodedata = nbqr.generate_qrcode_data(config, obj, "data_fields", url)
+        qrcodedata = generate_qrcode_data(config, obj, "data_fields", url)
 
         """Generate the base QR Code Image."""
         qrcode_image = segno.make(qrcodedata, error="H").to_pil(scale=2, border=0)
 
         """Check if we want data in the center of the QRCode."""
-        qrcode_image = nbqr.image_ensure_data_in_image(qrcode_image, config, obj)
+        qrcode_image = image_ensure_data_in_image(qrcode_image, config, obj)
 
         """Check if we want text below or next to the QRCode."""
-        qrcode_image = nbqr.image_ensure_text_in_image(qrcode_image, config,obj)
+        qrcode_image = image_ensure_text_in_image(qrcode_image, config,obj)
 
         """Check for format in request, to display the right activated button on the web page."""
         if (
@@ -47,7 +47,7 @@ class QRCodeContent(PluginTemplateExtension):
         return self.render(
             "netbox_qr/qr.html",
             extra_context={
-                "qr": nbqr.pil2pngdatauri(qrcode_image),
+                "qr": pil2pngdatauri(qrcode_image),
                 "with_text": btn_with_text,
             },
         )
