@@ -69,22 +69,22 @@ def image_ensure_data_in_image(img, config, obj):
     """Check if data in the center of the QR Code is wanted and generate it."""
     if config.get("data_in_image") and config.get("data_in_image") is not None:
         if getattr(obj, config.get("data_in_image"), None):
-            """Get a font."""
+            # Get a font.
             file_path = resource_stream(
                 __name__, "fonts/" + config.get("font") + ".ttf"
             )
             font = ImageFont.truetype(file_path, 20)
-            """Get a drawing context."""
+            # Get a drawing context.
             draw = ImageDraw.Draw(img)
-            """Get text from the object."""
+            # Get text from the object.
             text = getattr(obj, config.get("data_in_image"))
-            """Calculate Text size and area."""
+            # Calculate Text size and area.
             text_width, text_height = draw.textsize(text, font=font)
             text_area = text_width * text_height
-            """Calculate Image area."""
+            # Calculate Image area.
             img_area = img.width * img.height
             if text_area * 100 / img_area < 28:
-                """Only draw the data in the center of the QR Code if its area is not more than 30 percent of the whole QR Code."""
+                # Only draw the data in the center of the QR Code if its area is not more than 30 percent of the whole QR Code.
                 bbox = [
                     (
                         img.width / 2 - text_width / 2,
@@ -95,7 +95,7 @@ def image_ensure_data_in_image(img, config, obj):
                         img.height / 2 + text_height / 2,
                     ),
                 ]
-                """Box size must not be bigger than 30 percent of the whole image."""
+                # Box size must not be bigger than 30 percent of the whole image.
                 draw.rectangle(bbox, fill="white")
                 draw.text(
                     (
@@ -114,7 +114,7 @@ def generate_data_from_fields(
     """Generate the QRCode Data from configured data_fields."""
     data = ""
     count = 0
-    if url != None:
+    if url is not None:
         count += len(url)
     if config.get(fields):
         data = []
