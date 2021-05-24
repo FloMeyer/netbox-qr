@@ -27,18 +27,33 @@ def get_concat_v(im1, im2):
 
 
 def image_ensure_text_in_image(img, config, obj):
-    """Checks if text is wanted below or next to the QR Code."""
-    img_text = Image.new('L', (img.width*2, img.height), 'white')
+    """Generate a new empty image."""
+    img_text = Image.new('L', (img.width * 2, img.height), 'white')
+    """Generate the text variable."""
     text = generate_data_from_fields(config, obj, "text_fields", None, 8000)
-    draw = ImageDraw.Draw(img_text)
-    draw.text((0, 0), text, font=get_font(config,32), fill='black')
+    """Now try the biggest possible font size."""
+    font_size = 56
+    flag = True
+    while flag:
+        font = get_font(config, font_size)
+        draw = ImageDraw.Draw(img_text)
+        width, height = draw.textsize(text, font=font)
+        if width < img.width and height < img.height:
+            flag = False
+        font_size -= 1
+    """Now draw the text to img_text."""
+    draw.text((0, 0), text, font=font, fill='black')
+    """Now put the two images together."""
     img_text_concat = get_concat_h(img, img_text)
     return img_text_concat
 
 def get_font(config, size=32):
     file_path = resource_stream(__name__, "fonts/" + config.get("font") + ".ttf")
-    font = ImageFont.truetype(file_path, size)
-    return font
+    try:
+        return ImageFont.truetype(file_path, size)
+    except Exception:
+        return ImageFont.load_default()
+        
 
 
 def image_ensure_data_in_image(img, config, obj):
