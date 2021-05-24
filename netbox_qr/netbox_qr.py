@@ -13,14 +13,14 @@ def pil2pngdatauri(img):
 
 
 def get_concat_h(im1, im2):
-    dst = Image.new('RGB', (im1.width + im2.width, im1.height))
+    dst = Image.new("RGB", (im1.width + im2.width, im1.height))
     dst.paste(im1, (0, 0))
     dst.paste(im2, (im1.width, 0))
     return dst
 
 
 def get_concat_v(im1, im2):
-    dst = Image.new('RGB', (im1.width, im1.height + im2.height))
+    dst = Image.new("RGB", (im1.width, im1.height + im2.height))
     dst.paste(im1, (0, 0))
     dst.paste(im2, (0, im1.height))
     return dst
@@ -28,7 +28,7 @@ def get_concat_v(im1, im2):
 
 def image_ensure_text_in_image(img, config, obj):
     """Generate a new empty image."""
-    img_text = Image.new('L', (img.width * 2, img.height), 'white')
+    img_text = Image.new("L", (img.width * 2, img.height), "white")
     """Generate the text variable."""
     text = generate_data_from_fields(config, obj, "text_fields", None, 8000)
     """Now try the biggest possible font size."""
@@ -42,7 +42,12 @@ def image_ensure_text_in_image(img, config, obj):
             flag = False
         font_size -= 1
     """Now draw the text to img_text."""
-    draw.text(((img.width*2-text_width)/2, (img.height-text_height)/2), text, font=font, fill='black')
+    draw.text(
+        ((img.width * 2 - text_width) / 2, (img.height - text_height) / 2),
+        text,
+        font=font,
+        fill="black",
+    )
     """Now put the two images together."""
     img_text_concat = get_concat_h(img, img_text)
     return img_text_concat
