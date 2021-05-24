@@ -29,7 +29,7 @@ class QRCodeContent(PluginTemplateExtension):
         # Check for format in request, to display the right activated button on the web page.
         if (
             "with_text" in self.context["request"].GET
-            and self.context["request"].GET["with_text"]
+            and self.context["request"].GET["with_text"] == "true"
         ):
             with_text = True
         else:
@@ -38,7 +38,7 @@ class QRCodeContent(PluginTemplateExtension):
         # Check for text_format in request, to display the right activated button on the web page.
         if (
             "text_below" in self.context["request"].GET
-            and self.context["request"].GET["text_below"]
+            and self.context["request"].GET["text_below"] == "true"
         ):
             text_below = True
         else:
