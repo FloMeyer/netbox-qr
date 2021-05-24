@@ -16,7 +16,6 @@ class QRCodeContent(PluginTemplateExtension):
         """Generate Content for page."""
         config = self.context["config"]
         obj = self.context["object"]
-        request = self.context["request"]
         url = self.context["request"].build_absolute_uri(obj.get_absolute_url())
 
         # Get object specific settings.
