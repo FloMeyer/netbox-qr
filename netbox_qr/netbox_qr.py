@@ -28,7 +28,7 @@ def get_concat_v(im1, im2):
 
 def image_ensure_text_in_image(img, config, obj):
     """Checks if text is wanted below or next to the QR Code."""
-    img_text = Image.new('L', img.size, 'white')
+    img_text = Image.new('L', (img.width*2, img.height), 'white')
     text = generate_data_from_fields(config, obj, "text_fields", None, 8000)
     draw = ImageDraw.Draw(img_text)
     draw.text((0, 0), text, font=get_font(config,32), fill='black')
