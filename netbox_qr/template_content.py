@@ -1,10 +1,5 @@
 """Netbox QR Code template content."""
-
-import base64
-from io import BytesIO
 from extras.plugins import PluginTemplateExtension
-from PIL import Image, ImageDraw, ImageFont
-from pkg_resources import resource_stream
 import segno
 import netbox_qr.py as nbqr
 
