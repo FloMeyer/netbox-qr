@@ -52,20 +52,22 @@ def image_ensure_text_in_image(img, config, obj):
     img_text_concat = get_concat_h(img, img_text)
     return img_text_concat
 
+
 def get_font(config, size=32):
     file_path = resource_stream(__name__, "fonts/" + config.get("font") + ".ttf")
     try:
         return ImageFont.truetype(file_path, size)
     except Exception:
         return ImageFont.load_default()
-        
 
 
 def image_ensure_data_in_image(img, config, obj):
     if config.get("data_in_image") and config.get("data_in_image") != None:
         if getattr(obj, config.get("data_in_image"), None):
             """Get a font."""
-            file_path = resource_stream(__name__, "fonts/" + config.get("font") + ".ttf")
+            file_path = resource_stream(
+                __name__, "fonts/" + config.get("font") + ".ttf"
+            )
             font = ImageFont.truetype(file_path, 20)
             """Get a drawing context."""
             draw = ImageDraw.Draw(img)
@@ -101,7 +103,9 @@ def image_ensure_data_in_image(img, config, obj):
     return img
 
 
-def generate_data_from_fields(config, obj, fields="data_fields", url=None, __data_max_length__=4296):
+def generate_data_from_fields(
+    config, obj, fields="data_fields", url=None, __data_max_length__=4296
+):
     """Generate the QRCode Data from configured data_fields."""
     data = ""
     count = 0
@@ -128,19 +132,23 @@ def generate_data_from_fields(config, obj, fields="data_fields", url=None, __dat
                         pass
                 else:
                     if data_field == "length":
-                        data_to_append = str(getattr(obj, data_field)) + " " + getattr(obj, "length_unit")
+                        data_to_append = (
+                            str(getattr(obj, data_field))
+                            + " "
+                            + getattr(obj, "length_unit")
+                        )
                         if count + len(data_to_append) < __data_max_length__:
-                            data.append(
-                                "{}".format(data_to_append)
-                            )
+                            data.append("{}".format(data_to_append))
                             count += len(data_to_append)
                     elif data_field in ("termination_a", "termination_b"):
                         try:
-                            data_to_append = str(getattr(obj, data_field).device) + " " + str(getattr(obj, data_field))
+                            data_to_append = (
+                                str(getattr(obj, data_field).device)
+                                + " "
+                                + str(getattr(obj, data_field))
+                            )
                             if count + len(data_to_append) < __data_max_length__:
-                                data.append(
-                                    "{}".format(data_to_append)
-                                )
+                                data.append("{}".format(data_to_append))
                                 count += len(data_to_append)
                         except AttributeError:
                             pass
