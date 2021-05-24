@@ -1,3 +1,4 @@
+"""Supporting functions to generate QR Codes for NetBox."""
 import base64
 from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont
@@ -13,6 +14,7 @@ def pil2pngdatauri(img):
 
 
 def get_concat_h(im1, im2):
+    """Concatenate two images horizontally."""
     dst = Image.new("RGB", (im1.width + im2.width, im1.height))
     dst.paste(im1, (0, 0))
     dst.paste(im2, (im1.width, 0))
@@ -20,6 +22,7 @@ def get_concat_h(im1, im2):
 
 
 def get_concat_v(im1, im2):
+    """Concatenate two images vertically."""
     dst = Image.new("RGB", (im1.width, im1.height + im2.height))
     dst.paste(im1, (0, 0))
     dst.paste(im2, (0, im1.height))
@@ -54,6 +57,7 @@ def image_ensure_text_in_image(img, config, obj):
 
 
 def get_font(config, size=32):
+    """Try to load the given font or load a "better than nothing" default font."""
     file_path = resource_stream(__name__, "fonts/" + config.get("font") + ".ttf")
     try:
         return ImageFont.truetype(file_path, size)
@@ -62,6 +66,7 @@ def get_font(config, size=32):
 
 
 def image_ensure_data_in_image(img, config, obj):
+    """Check if data in the center of the QR Code is wanted and generate it."""
     if config.get("data_in_image") and config.get("data_in_image") != None:
         if getattr(obj, config.get("data_in_image"), None):
             """Get a font."""
