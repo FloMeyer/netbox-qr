@@ -63,7 +63,7 @@ class QRCodeContent(PluginTemplateExtension):
             extra_context={
                 "qr": pil2pngdatauri(qrcode_image),
                 "with_text": with_text,
-                "text_format": text_below,
+                "text_below": text_below,
             },
         )
 
