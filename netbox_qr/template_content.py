@@ -47,7 +47,7 @@ class QRCodeContent(PluginTemplateExtension):
 
         """Check if we want text below or next to the QRCode."""
         if with_text:
-            qrcode_image = image_ensure_text_in_image(qrcode_image, config,obj)
+            qrcode_image = image_ensure_text_in_image(qrcode_image, config, obj)
 
         """Render the page content."""
         return self.render(
