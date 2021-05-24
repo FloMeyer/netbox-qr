@@ -3,7 +3,6 @@ from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont
 from pkg_resources import resource_stream
 
-__qrcode_data_max__ = 4296
 
 def pil2pngdatauri(img):
     """Convert Pillow image to data uri."""
@@ -16,7 +15,7 @@ def pil2pngdatauri(img):
 def image_ensure_text_in_image(img, config, obj):
     """Checks if text is wanted below or next to the QR Code."""
     img_text = Image.new('L', img.size, 'white')
-    text = generate_qrcode_data(config, obj, "text_fields")
+    text = generate_data_from_fields(config, obj, "text_fields", None, 8000)
     draw = ImageDraw.Draw(img_text)
     draw.text((0, 0), text, font=get_font(config,32), fill='black')
     return img_text
@@ -67,7 +66,7 @@ def image_ensure_data_in_image(img, config, obj):
     return img
 
 
-def generate_qrcode_data(config, obj, fields="data_fields", url=None):
+def generate_data_from_fields(config, obj, fields="data_fields", url=None, __data_max_length__=4296):
     """Generate the QRCode Data from configured data_fields."""
     data = ""
     count = 0
@@ -87,7 +86,7 @@ def generate_qrcode_data(config, obj, fields="data_fields", url=None):
                     try:
                         if getattr(obj, data_field).get(cfn):
                             data_to_append = getattr(obj, data_field).get(cfn)
-                            if count + len(data_to_append) < __qrcode_data_max__:
+                            if count + len(data_to_append) < __data_max_length__:
                                 data.append("{}".format(data_to_append))
                                 count += len(data_to_append)
                     except AttributeError:
@@ -95,7 +94,7 @@ def generate_qrcode_data(config, obj, fields="data_fields", url=None):
                 else:
                     if data_field == "length":
                         data_to_append = str(getattr(obj, data_field)) + " " + getattr(obj, "length_unit")
-                        if count + len(data_to_append) < __qrcode_data_max__:
+                        if count + len(data_to_append) < __data_max_length__:
                             data.append(
                                 "{}".format(data_to_append)
                             )
@@ -103,7 +102,7 @@ def generate_qrcode_data(config, obj, fields="data_fields", url=None):
                     elif data_field in ("termination_a", "termination_b"):
                         try:
                             data_to_append = str(getattr(obj, data_field).device) + " " + str(getattr(obj, data_field))
-                            if count + len(data_to_append) < __qrcode_data_max__:
+                            if count + len(data_to_append) < __data_max_length__:
                                 data.append(
                                     "{}".format(data_to_append)
                                 )
@@ -112,7 +111,7 @@ def generate_qrcode_data(config, obj, fields="data_fields", url=None):
                             pass
                     else:
                         data_to_append = getattr(obj, data_field)
-                        if count + len(data_to_append) < __qrcode_data_max__:
+                        if count + len(data_to_append) < __data_max_length__:
                             data.append("{}".format(data_to_append))
                             count += len(data_to_append)
             elif data_field == "url":

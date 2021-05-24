@@ -1,7 +1,7 @@
 """Netbox QR Code template content."""
 from extras.plugins import PluginTemplateExtension
 import segno
-from .netbox_qr import pil2pngdatauri, image_ensure_text_in_image, image_ensure_data_in_image, generate_qrcode_data
+from .netbox_qr import generate_data_from_fields, pil2pngdatauri, image_ensure_text_in_image, image_ensure_data_in_image, generate_qrcode_data
 
 
 class QRCodeContent(PluginTemplateExtension):
@@ -22,10 +22,10 @@ class QRCodeContent(PluginTemplateExtension):
         """Override default config."""
         config.update(obj_cfg)
 
-        """Add the URL at the end of the data field."""
-        qrcodedata = generate_qrcode_data(config, obj, "data_fields", url)
+        """Generate the data which is read by the qr code reader."""
+        qrcodedata = generate_data_from_fields(config, obj, "data_fields", url)
 
-        """Generate the base QR Code Image."""
+        """Generate the base QR Code Image. Scale 2 because 1 would be too small."""
         qrcode_image = segno.make(qrcodedata, error="H").to_pil(scale=2, border=0)
 
         """Check if we want data in the center of the QRCode."""
