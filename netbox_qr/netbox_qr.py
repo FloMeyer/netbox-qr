@@ -3,6 +3,8 @@ from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont
 from pkg_resources import resource_stream
 
+__qrcode_data_max__ = 4296
+
 def pil2pngdatauri(img):
     """Convert Pillow image to data uri."""
     output = BytesIO()

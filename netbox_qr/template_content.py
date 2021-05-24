@@ -3,8 +3,6 @@ from extras.plugins import PluginTemplateExtension
 import segno
 import netbox_qr.py as nbqr
 
-__qrcode_data_max__ = 4296
-
 
 class QRCodeContent(PluginTemplateExtension):
     """Generate QR Code Content."""
