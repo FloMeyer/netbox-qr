@@ -253,7 +253,7 @@ PLUGINS_CONFIG = {
         "with_text": True,
         "font": "Roboto-Regular",
         "data_fields": ["name", "serial", "url"],
-        "text_fields": ["name", "serial" ],
+        "text_fields": ["name", "serial"],
         "cable": {
             "data_fields": [
                 "label",
@@ -261,7 +261,7 @@ PLUGINS_CONFIG = {
                 "termination_b",
                 "type",
                 "length",
-                "url"
+                "url",
             ],
             "data_in_image": "label",
         },
