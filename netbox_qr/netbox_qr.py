@@ -12,13 +12,28 @@ def pil2pngdatauri(img):
     return u"data:image/png;base64," + data64.decode("utf-8")
 
 
+def get_concat_h(im1, im2):
+    dst = Image.new('RGB', (im1.width + im2.width, im1.height))
+    dst.paste(im1, (0, 0))
+    dst.paste(im2, (im1.width, 0))
+    return dst
+
+
+def get_concat_v(im1, im2):
+    dst = Image.new('RGB', (im1.width, im1.height + im2.height))
+    dst.paste(im1, (0, 0))
+    dst.paste(im2, (0, im1.height))
+    return dst
+
+
 def image_ensure_text_in_image(img, config, obj):
     """Checks if text is wanted below or next to the QR Code."""
     img_text = Image.new('L', img.size, 'white')
     text = generate_data_from_fields(config, obj, "text_fields", None, 8000)
     draw = ImageDraw.Draw(img_text)
     draw.text((0, 0), text, font=get_font(config,32), fill='black')
-    return img_text
+    img_text_concat = get_concat_h(img, img_text)
+    return img_text_concat
 
 def get_font(config, size=32):
     file_path = resource_stream(__name__, "fonts/" + config.get("font") + ".ttf")
