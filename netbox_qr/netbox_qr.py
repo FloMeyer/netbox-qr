@@ -48,7 +48,7 @@ def image_ensure_text_in_image(img, config, obj, text_below = False):
             font_size -= 1
         # Now draw the text to img_text.
         draw.text(
-            ((img.width * 2 - text_width) / 2, (img.height - text_height) / 2),
+            ((img.width - text_width) / 2, 0),
             text,
             font=font,
             fill="black",
