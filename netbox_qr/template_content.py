@@ -19,15 +19,15 @@ class QRCodeContent(PluginTemplateExtension):
         request = self.context["request"]
         url = self.context["request"].build_absolute_uri(obj.get_absolute_url())
 
-        """Get object specific settings."""
+        # Get object specific settings.
         obj_cfg = config.get(self.model.replace("dcim.", ""))
         if obj_cfg is None:
             return ""
 
-        """Override default config."""
+        # Override default config.
         config.update(obj_cfg)
 
-        """Check for format in request, to display the right activated button on the web page."""
+        # Check for format in request, to display the right activated button on the web page.
         if (
             "format" in self.context["request"].GET
             and self.context["request"].GET["format"] != "without_text"
@@ -36,20 +36,20 @@ class QRCodeContent(PluginTemplateExtension):
         else:
             with_text = False
 
-        """Generate the data which is read by the qr code reader."""
+        # Generate the data which is read by the qr code reader.
         qrcodedata = generate_data_from_fields(config, obj, "data_fields", url)
 
-        """Generate the base QR Code Image. Scale 2 because 1 would be too small."""
+        # Generate the base QR Code Image. Scale 2 because 1 would be too small.
         qrcode_image = segno.make(qrcodedata, error="H").to_pil(scale=2, border=1)
 
-        """Check if we want data in the center of the QRCode."""
+        # Check if we want data in the center of the QRCode.
         qrcode_image = image_ensure_data_in_image(qrcode_image, config, obj)
 
-        """Check if we want text below or next to the QRCode."""
+        # Check if we want text below or next to the QRCode.
         if with_text:
             qrcode_image = image_ensure_text_in_image(qrcode_image, config, obj)
 
-        """Render the page content."""
+        # Render the page content.
         return self.render(
             "netbox_qr/qr.html",
             extra_context={
