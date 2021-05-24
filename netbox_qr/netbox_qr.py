@@ -32,9 +32,9 @@ def get_concat_v(im1, im2):
 def image_ensure_text_in_image(img, config, obj):
     """Generate a new empty image."""
     img_text = Image.new("L", (img.width * 2, img.height), "white")
-    """Generate the text variable."""
+    #Generate the text variable.
     text = generate_data_from_fields(config, obj, "text_fields", None, 8000)
-    """Now try the biggest possible font size."""
+    #Now try the biggest possible font size.
     font_size = 56
     flag = True
     while flag:
@@ -44,14 +44,14 @@ def image_ensure_text_in_image(img, config, obj):
         if text_width < img.width * 2 and text_height < img.height:
             flag = False
         font_size -= 1
-    """Now draw the text to img_text."""
+    #Now draw the text to img_text.
     draw.text(
         ((img.width * 2 - text_width) / 2, (img.height - text_height) / 2),
         text,
         font=font,
         fill="black",
     )
-    """Now put the two images together."""
+    #Now put the two images together.
     img_text_concat = get_concat_h(img, img_text)
     return img_text_concat
 
@@ -67,7 +67,7 @@ def get_font(config, size=32):
 
 def image_ensure_data_in_image(img, config, obj):
     """Check if data in the center of the QR Code is wanted and generate it."""
-    if config.get("data_in_image") and config.get("data_in_image") != None:
+    if config.get("data_in_image") and config.get('data_in_image') is not None:
         if getattr(obj, config.get("data_in_image"), None):
             """Get a font."""
             file_path = resource_stream(
