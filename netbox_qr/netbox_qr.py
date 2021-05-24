@@ -38,7 +38,7 @@ def image_ensure_text_in_image(img, config, obj):
         font = get_font(config, font_size)
         draw = ImageDraw.Draw(img_text)
         width, height = draw.textsize(text, font=font)
-        if width < img.width and height < img.height:
+        if width < img.width * 2 and height < img.height:
             flag = False
         font_size -= 1
     """Now draw the text to img_text."""
