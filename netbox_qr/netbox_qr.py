@@ -33,7 +33,7 @@ def image_ensure_text_in_image(img, config, obj, text_below = False):
     """Generate a new empty image."""
     if text_below:
         # Generate empty Image
-        img_text = Image.new("L", (img.width, 20), "white")
+        img_text = Image.new("L", (img.width, 40), "white")
         # Generate the text variable.
         text = generate_data_from_fields(config, obj, "text_below_fields", None, 8000)
         # Now try the biggest possible font size.
@@ -43,7 +43,7 @@ def image_ensure_text_in_image(img, config, obj, text_below = False):
             font = get_font(config, font_size)
             draw = ImageDraw.Draw(img_text)
             text_width, text_height = draw.textsize(text, font=font)
-            if text_width < img.width and text_height < 20:
+            if text_width < img.width and text_height < 40:
                 flag = False
             font_size -= 1
         # Now draw the text to img_text.
