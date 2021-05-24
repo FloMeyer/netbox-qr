@@ -13,7 +13,21 @@ class QRConfig(PluginConfig):
     description = "A netbox plugin for generating qr codes for specific pages."
     base_url = "qr"
     required_settings = []
-    default_settings = {"pages": ["device", "rack", "cable"]}
+    default_settings = {
+        "data_fields": ["name", "serial"],
+        "font": "Arial",
+        "device": {},
+        "rack": {},
+        "cable": {
+            "data_fields": [
+                "label",
+                "length",
+                "type",
+                "termination_a",
+                "termination_b",
+            ],
+        },
+    }
     caching_config = {}
 
 

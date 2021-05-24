@@ -251,11 +251,20 @@ PLUGINS = ["netbox_qr"]
 PLUGINS_CONFIG = {
     "netbox_qr": {
         "with_text": True,
-        "text_fields": ["name", "serial"],
-        "font": "Arial",
-        "config_device": {},
-        "config_rack": {},
-        "config_cable": {},
+        "font": "Roboto-Regular",
+        "data_fields": ["name", "serial", "url"],
+        "text_fields": ["name", "serial" ],
+        "cable": {
+            "data_fields": [
+                "label",
+                "termination_a",
+                "termination_b",
+                "type",
+                "length",
+                "url"
+            ],
+            "data_in_image": "label",
+        },
     }
 }
 
