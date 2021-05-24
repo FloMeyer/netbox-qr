@@ -42,7 +42,7 @@ def image_ensure_text_in_image(img, config, obj):
             flag = False
         font_size -= 1
     """Now draw the text to img_text."""
-    draw.text(((img.width-text_width)/2-4, (img.height-text_height)/2-4), text, font=font, fill='black')
+    draw.text(((img.width*2-text_width)/2, (img.height-text_height)/2), text, font=font, fill='black')
     """Now put the two images together."""
     img_text_concat = get_concat_h(img, img_text)
     return img_text_concat
