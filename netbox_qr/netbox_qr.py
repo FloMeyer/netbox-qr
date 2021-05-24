@@ -67,7 +67,7 @@ def get_font(config, size=32):
 
 def image_ensure_data_in_image(img, config, obj):
     """Check if data in the center of the QR Code is wanted and generate it."""
-    if config.get("data_in_image") and config.get('data_in_image') is not None:
+    if config.get("data_in_image") and config.get("data_in_image") is not None:
         if getattr(obj, config.get("data_in_image"), None):
             """Get a font."""
             file_path = resource_stream(
