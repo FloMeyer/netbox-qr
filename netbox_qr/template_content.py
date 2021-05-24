@@ -49,7 +49,7 @@ class QRCodeContent(PluginTemplateExtension):
             "netbox_qr/qr.html",
             extra_context={
                 "qr": pil2pngdatauri(qrcode_image),
-                "with_text": btn_with_text,
+                "with_text": with_text,
             },
         )
 
