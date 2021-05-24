@@ -1,7 +1,7 @@
 """Netbox QR Code template content."""
 from extras.plugins import PluginTemplateExtension
 import segno
-from .netbox_qr import generate_data_from_fields, pil2pngdatauri, image_ensure_text_in_image, image_ensure_data_in_image, generate_qrcode_data
+from .netbox_qr import generate_data_from_fields, pil2pngdatauri, image_ensure_text_in_image, image_ensure_data_in_image
 
 
 class QRCodeContent(PluginTemplateExtension):
