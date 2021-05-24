@@ -40,7 +40,7 @@ def image_ensure_text_in_image(img, config, obj, text_below = False):
         text = generate_data_from_fields(config, obj, "text_below_fields", None, 8000)
         # split text to lines every 15 characters
         text_splitted = split(text, 15)
-        text = "\r\n".join(text_splitted)
+        text = "test"
         lines = len(text_splitted)
         # Generate empty Image
         img_text = Image.new("L", (img.width, lines*16), "white")
