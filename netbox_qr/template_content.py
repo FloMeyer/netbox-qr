@@ -26,7 +26,7 @@ class QRCodeContent(PluginTemplateExtension):
         qrcodedata = generate_data_from_fields(config, obj, "data_fields", url)
 
         """Generate the base QR Code Image. Scale 2 because 1 would be too small."""
-        qrcode_image = segno.make(qrcodedata, error="H").to_pil(scale=2, border=5)
+        qrcode_image = segno.make(qrcodedata, error="H").to_pil(scale=2, border=1)
 
         """Check if we want data in the center of the QRCode."""
         qrcode_image = image_ensure_data_in_image(qrcode_image, config, obj)
