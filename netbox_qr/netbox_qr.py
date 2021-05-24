@@ -84,7 +84,7 @@ def image_ensure_data_in_image(img, config, obj):
             # Calculate Image area.
             img_area = img.width * img.height
             if text_area * 100 / img_area < 28:
-                # Only draw the data in the center of the QR Code if its area 
+                # Only draw the data in the center of the QR Code if its area
                 # is not more than 28 percent of the whole QR Code.
                 # Should be 30 percent, but this is not working.
                 bbox = [
