@@ -10,9 +10,15 @@
     <div class="panel-heading">
         <strong>QR Code</strong>
         <div class="pull-right">
+            {% if with_text %}
             <div class="btn-group btn-group-xs" role="group">
-                <a href="?format=with_text" class="btn btn-default{% if with_text %} active {% endif %}">With Text</a>
-                <a href="?format=without_text" class="btn btn-default{% if not with_text %} active {% endif %}">Without Text</a>
+                <a href="?with_text=true&text_below=true" class="btn btn-default{% if text_below %} active {% endif %}">Text below</a>
+                <a href="?with_text=true" class="btn btn-default{% if not text_below %} active {% endif %}">Text right</a>
+            </div>
+            {% endif %}
+            <div class="btn-group btn-group-xs" role="group">
+                <a href="?with_text=true" class="btn btn-default{% if with_text %} active {% endif %}">With Text</a>
+                <a href="?with_text=false" class="btn btn-default{% if not with_text %} active {% endif %}">Without Text</a>
             </div>
         </div>
     </div>

@@ -254,6 +254,7 @@ PLUGINS_CONFIG = {
         "font": "Roboto-Regular",
         "data_fields": ["name", "serial", "url"],
         "text_fields": ["name", "serial"],
+        "text_below_fields": ["name"],
         "cable": {
             "data_fields": [
                 "label",

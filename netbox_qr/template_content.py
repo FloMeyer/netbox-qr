@@ -28,12 +28,21 @@ class QRCodeContent(PluginTemplateExtension):
 
         # Check for format in request, to display the right activated button on the web page.
         if (
-            "format" in self.context["request"].GET
-            and self.context["request"].GET["format"] != "without_text"
+            "with_text" in self.context["request"].GET
+            and self.context["request"].GET["with_text"]
         ):
             with_text = True
         else:
             with_text = False
+
+        # Check for text_format in request, to display the right activated button on the web page.
+        if (
+            "text_below" in self.context["request"].GET
+            and self.context["request"].GET["text_below"]
+        ):
+            text_below = True
+        else:
+            text_below = False
 
         # Generate the data which is read by the qr code reader.
         qrcodedata = generate_data_from_fields(config, obj, "data_fields", url)
@@ -54,6 +63,7 @@ class QRCodeContent(PluginTemplateExtension):
             extra_context={
                 "qr": pil2pngdatauri(qrcode_image),
                 "with_text": with_text,
+                "text_format": text_below,
             },
         )
 
