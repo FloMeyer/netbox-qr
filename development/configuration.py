@@ -265,6 +265,7 @@ PLUGINS_CONFIG = {
                 "url",
             ],
             "data_in_image": "label",
+            "text_fields": ["label"],
             "text_below_fields": ["label"],
         },
     }
