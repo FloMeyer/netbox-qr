@@ -29,30 +29,55 @@ def get_concat_v(im1, im2):
     return dst
 
 
-def image_ensure_text_in_image(img, config, obj):
+def image_ensure_text_in_image(img, config, obj, text_below = False):
     """Generate a new empty image."""
-    img_text = Image.new("L", (img.width * 2, img.height), "white")
-    # Generate the text variable.
-    text = generate_data_from_fields(config, obj, "text_fields", None, 8000)
-    # Now try the biggest possible font size.
-    font_size = 56
-    flag = True
-    while flag:
-        font = get_font(config, font_size)
-        draw = ImageDraw.Draw(img_text)
-        text_width, text_height = draw.textsize(text, font=font)
-        if text_width < img.width * 2 and text_height < img.height:
-            flag = False
-        font_size -= 1
-    # Now draw the text to img_text.
-    draw.text(
-        ((img.width * 2 - text_width) / 2, (img.height - text_height) / 2),
-        text,
-        font=font,
-        fill="black",
-    )
-    # Now put the two images together.
-    img_text_concat = get_concat_h(img, img_text)
+    if text_below:
+        # Generate empty Image
+        img_text = Image.new("L", (img.width, 20), "white")
+        # Generate the text variable.
+        text = generate_data_from_fields(config, obj, "text_below_fields", None, 8000)
+        # Now try the biggest possible font size.
+        font_size = 56
+        flag = True
+        while flag:
+            font = get_font(config, font_size)
+            draw = ImageDraw.Draw(img_text)
+            text_width, text_height = draw.textsize(text, font=font)
+            if text_width < img.width and text_height < 20:
+                flag = False
+            font_size -= 1
+        # Now draw the text to img_text.
+        draw.text(
+            ((img.width * 2 - text_width) / 2, (img.height - text_height) / 2),
+            text,
+            font=font,
+            fill="black",
+        )
+        # Now put the two images together.
+        img_text_concat = get_concat_v(img, img_text)
+    else:
+        img_text = Image.new("L", (img.width * 2, img.height), "white")
+        # Generate the text variable.
+        text = generate_data_from_fields(config, obj, "text_fields", None, 8000)
+        # Now try the biggest possible font size.
+        font_size = 56
+        flag = True
+        while flag:
+            font = get_font(config, font_size)
+            draw = ImageDraw.Draw(img_text)
+            text_width, text_height = draw.textsize(text, font=font)
+            if text_width < img.width * 2 and text_height < img.height:
+                flag = False
+            font_size -= 1
+        # Now draw the text to img_text.
+        draw.text(
+            ((img.width * 2 - text_width) / 2, (img.height - text_height) / 2),
+            text,
+            font=font,
+            fill="black",
+        )
+        # Now put the two images together.
+        img_text_concat = get_concat_h(img, img_text)
     return img_text_concat
 
 
