@@ -14,18 +14,23 @@ class QRConfig(PluginConfig):
     base_url = "qr"
     required_settings = []
     default_settings = {
-        "data_fields": ["name", "serial"],
-        "font": "Arial",
-        "device": {},
-        "rack": {},
+        "with_text": True,
+        "font": "Roboto-Regular",
+        "data_fields": ["name", "serial", "url"],
+        "text_fields": ["name", "serial"],
+        "text_below_fields": ["name"],
         "cable": {
             "data_fields": [
                 "label",
-                "length",
-                "type",
                 "termination_a",
                 "termination_b",
+                "type",
+                "length",
+                "url",
             ],
+            "data_in_image": "label",
+            "text_fields": ["label"],
+            "text_below_fields": ["label"],
         },
     }
     caching_config = {}
