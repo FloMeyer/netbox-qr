@@ -30,10 +30,11 @@ def get_concat_v(im1, im2):
 
 
 def split(str, num):
-    return [ str[start:start+num] for start in range(0, len(str), num) ]
+    """Split strings every 'num' characters."""
+    return [str[start : start + num] for start in range(0, len(str), num)]
 
 
-def image_ensure_text_in_image(img, config, obj, text_below = False):
+def image_ensure_text_in_image(img, config, obj, text_below=False):
     """Generate a new empty image."""
     if text_below:
         # Generate the text variable.
@@ -43,8 +44,8 @@ def image_ensure_text_in_image(img, config, obj, text_below = False):
         text = "\r\n".join(text_splitted)
         lines = len(text_splitted)
         # Generate empty Image
-        img_text = Image.new("L", (img.width, lines*16), "white")
-        
+        img_text = Image.new("L", (img.width, lines * 16), "white")
+
         # Now try the biggest possible font size.
         font_size = 56
         flag = True
@@ -52,7 +53,7 @@ def image_ensure_text_in_image(img, config, obj, text_below = False):
             font = get_font(config, font_size)
             draw = ImageDraw.Draw(img_text)
             text_width, text_height = draw.textsize(text, font=font)
-            if text_width < img.width and text_height < lines*16:
+            if text_width < img.width and text_height < lines * 16:
                 flag = False
             font_size -= 1
         # Now draw the text to img_text.
