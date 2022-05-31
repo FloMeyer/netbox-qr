@@ -8,7 +8,7 @@ class QRConfig(PluginConfig):
 
     name = "netbox_qr"
     verbose_name = "QR Code plugin for netbox."
-    version = "0.1.3"
+    version = "0.1.5"
     author = "Florian Meyer"
     description = "A netbox plugin for generating qr codes for specific pages."
     base_url = "qr"

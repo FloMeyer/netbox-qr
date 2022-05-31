@@ -10,7 +10,7 @@ with open(path.join(this_directory, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="netbox_qr",
-    version="0.1.4",
+    version="0.1.5",
     python_requires=">=3",
     license="Apache 2.0",
     description="A netbox plugin for generating qr codes for specific pages.",
@@ -19,7 +19,7 @@ setup(
     author="Florian Meyer",
     author_email="flo@flomeyer.de",
     url="https://github.com/FloMeyer/netbox-qr",
-    download_url="https://github.com/FloMeyer/netbox-qr/archive/refs/tags/v0.1.4.tar.gz",
+    download_url="https://github.com/FloMeyer/netbox-qr/archive/refs/tags/v0.1.5.tar.gz",
     keywords=["netbox", "qrcode"],
     install_requires=[
         "segno",

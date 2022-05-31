@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "netbox_qr"
-version = "0.1.4"
+version = "0.1.5"
 description = "A netbox plugin for generating qr codes for specific pages."
 authors = ["FloMeyer <flo@flomeyer.de>"]
 license = "Apache 2.0"
@@ -8,7 +8,7 @@ license = "Apache 2.0"
 [tool.poetry.dependencies]
 python = "^3.8"
 segno = "^1.3.3"
-Pillow = "^8.2.0"
+Pillow = "^8.4.0"
 qrcode-artistic = "^2.1.0"
 
 [tool.poetry.dev-dependencies]
