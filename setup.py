@@ -8,7 +8,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name = 'netbox_qr',
-    version = '0.1.1',
+    version = '0.1.3',
     python_requires='>=3',
     license='Apache 2.0',
     description = 'A netbox plugin for generating qr codes for specific pages.',
@@ -21,7 +21,7 @@ setup(
     keywords = ['netbox', 'qrcode'],
     install_requires=[
             'segno',
-            'Pillow',
+            'Pillow<9.0.0',
             'qrcode-artistic',
         ],
     classifiers=[
